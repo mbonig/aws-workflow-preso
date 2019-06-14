@@ -1,6 +1,6 @@
 import { Stack, Construct, StackProps } from '@aws-cdk/cdk';
 import { Bucket } from '@aws-cdk/aws-s3';
-import { Function, Code, Runtime } from '@aws-cdk/aws-lambda';
+import { Function, Code, Runtime, Tracing } from '@aws-cdk/aws-lambda';
 import { Table, AttributeType } from '@aws-cdk/aws-dynamodb';
 import { LambdaRestApi } from '@aws-cdk/aws-apigateway';
 import { PolicyStatement, PolicyStatementEffect } from '@aws-cdk/aws-iam';
@@ -11,12 +11,12 @@ export class CdkStack extends Stack {
   s3Bucket: Bucket;
   greedyApiGateway: LambdaRestApi;
   docsTable: Table;
+
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     this.setupS3Bucket();
     this.setupDynamoDB();
-
     this.setupLambda();
     this.setupAPIGateway();
   }
@@ -31,6 +31,7 @@ export class CdkStack extends Stack {
     const dynamoAccess = new PolicyStatement(PolicyStatementEffect.Allow);
     dynamoAccess.addResource(this.docsTable.tableArn);
     dynamoAccess.addAction("dynamodb:*");
+
     this.processLambda = new Function(this, 'process-doc', {
       code: Code.directory('./handlers/convert'),
       handler: 'AWSLambdas::AWSLambdas.Function::FunctionHandler',
@@ -39,7 +40,8 @@ export class CdkStack extends Stack {
         S3_BUCKET: this.s3Bucket.bucketName,
         DOCS_TABLE: this.docsTable.tableName
       },
-      initialPolicy: [dynamoAccess]
+      initialPolicy: [dynamoAccess],
+      tracing: Tracing.Active
 
     });
   }
