@@ -1,0 +1,16 @@
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\bin\Release\netcoreapp2.2\rhel.7.2-x64\libhostpolicy.so
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\bin\Release\netcoreapp2.2\rhel.7.2-x64\libhostfxr.so
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\bin\Release\netcoreapp2.2\rhel.7.2-x64\AWSLambda1
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\bin\Release\netcoreapp2.2\rhel.7.2-x64\bootstrap
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\bin\Release\netcoreapp2.2\rhel.7.2-x64\AWSLambda1.deps.json
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\bin\Release\netcoreapp2.2\rhel.7.2-x64\AWSLambda1.runtimeconfig.json
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\bin\Release\netcoreapp2.2\rhel.7.2-x64\AWSLambda1.runtimeconfig.dev.json
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\bin\Release\netcoreapp2.2\rhel.7.2-x64\AWSLambda1.dll
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\bin\Release\netcoreapp2.2\rhel.7.2-x64\AWSLambda1.pdb
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\obj\Release\netcoreapp2.2\rhel.7.2-x64\AWSLambda1.csprojAssemblyReference.cache
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\obj\Release\netcoreapp2.2\rhel.7.2-x64\AWSLambda1.csproj.CoreCompileInputs.cache
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\obj\Release\netcoreapp2.2\rhel.7.2-x64\AWSLambda1.AssemblyInfoInputs.cache
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\obj\Release\netcoreapp2.2\rhel.7.2-x64\AWSLambda1.AssemblyInfo.cs
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\obj\Release\netcoreapp2.2\rhel.7.2-x64\AWSLambda1.dll
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\obj\Release\netcoreapp2.2\rhel.7.2-x64\AWSLambda1.pdb
+C:\Users\robert_koch\Source\Repos\AWSLambda1\AWSLambda1\bin\Release\netcoreapp2.2\rhel.7.2-x64\gdiplus.dll
