@@ -1,0 +1,81 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\robert_koch\\Source\\Repos\\AWSLambda1\\AWSLambda1\\AWSLambda1.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\robert_koch\\Source\\Repos\\AWSLambda1\\AWSLambda1\\AWSLambda1.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\robert_koch\\Source\\Repos\\AWSLambda1\\AWSLambda1\\AWSLambda1.csproj",
+        "projectName": "AWSLambda1",
+        "projectPath": "C:\\Users\\robert_koch\\Source\\Repos\\AWSLambda1\\AWSLambda1\\AWSLambda1.csproj",
+        "packagesPath": "C:\\Users\\robert_koch\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\robert_koch\\Source\\Repos\\AWSLambda1\\AWSLambda1\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\robert_koch\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://build.dev.denver.edmz.mcgraw-hill.com/nuget/Default": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[3.3.102.15, )"
+            },
+            "Amazon.Lambda.Core": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Amazon.Lambda.RuntimeSupport": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Amazon.Lambda.Serialization.Json": {
+              "target": "Package",
+              "version": "[1.5.0, )"
+            },
+            "EPPlus.Core.CoreCompat": {
+              "target": "Package",
+              "version": "[1.5.6, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
