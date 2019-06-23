@@ -1,6 +1,6 @@
 import {Construct, Stack, StackProps} from '@aws-cdk/cdk';
 import {Bucket, EventType} from '@aws-cdk/aws-s3';
-import {Code, Function, Runtime, Tracing} from '@aws-cdk/aws-lambda';
+import {Code, Function, Runtime} from '@aws-cdk/aws-lambda';
 import {AttributeType, Table} from '@aws-cdk/aws-dynamodb';
 import {
     AwsIntegration,
@@ -32,7 +32,7 @@ export class CdkStack extends Stack {
 
     setupAPIGateway() {
 
-        this.greedyApiGateway = new LambdaRestApi(this, 'endpoint', {
+        this.greedyApiGateway = new LambdaRestApi(this, 'doc-api', {
             handler: this.processLambda
         });
 
@@ -88,14 +88,19 @@ export class CdkStack extends Stack {
 
     setupLambda() {
 
+        let s3writePolicy = new PolicyStatement({
+            actions: ['S3:PutObject'],
+            resources: [`${this.docsBucket.bucketArn}/*`]
+        });
         this.processLambda = new Function(this, 'process-doc', {
             code: Code.asset('./handlers/convert'),
-            handler: 'AWSLambdas::AWSLambdas.Function::FunctionHandler',
-            runtime: Runtime.DotNetCore21,
+            handler: 'lambda_function.lambda_handler',
+            runtime: Runtime.Python37,
+            timeout: 15,
             environment: {
                 S3_BUCKET: this.docsBucket.bucketName
             },
-            tracing: Tracing.Active
+            initialPolicy: [s3writePolicy]
         });
 
         const dynamoAccess = new PolicyStatement({
