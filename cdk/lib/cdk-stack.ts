@@ -3,7 +3,7 @@ import {Bucket, EventType} from '@aws-cdk/aws-s3';
 import {Code, Function, Runtime} from '@aws-cdk/aws-lambda';
 import {AttributeType, Table} from '@aws-cdk/aws-dynamodb';
 import {
-    AwsIntegration,
+    AwsIntegration, LambdaIntegration,
     LambdaRestApi,
     PassthroughBehavior,
     RestApi
@@ -20,6 +20,7 @@ export class CdkStack extends Stack {
     catalogLambda: Function;
     catalogReadGateway: RestApi;
     private apigatewayRole: Role;
+    private getDocLambda: Function;
 
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
@@ -36,7 +37,14 @@ export class CdkStack extends Stack {
             handler: this.processLambda
         });
 
-        this.catalogReadGateway = new RestApi(this, 'catalog-api', {});
+        this.catalogReadGateway = new RestApi(this, 'catalog-api', {
+
+        });
+        this.catalogReadGateway.root.addResource('{proxy+}', {
+
+        }).addMethod('GET', new LambdaIntegration(this.getDocLambda, {
+            proxy: true
+        }));
         this.apigatewayRole = new Role(this, 'apigateway-dynamodb', {
             assumedBy: new ServicePrincipal('apigateway.amazonaws.com'),
             inlinePolicies: {
@@ -74,7 +82,7 @@ export class CdkStack extends Stack {
 
                 requestTemplates: {
                     'application/json': `{
-                            "TableName": "CdkStack-docscatalog229FB2BA-13C1W6I45GIKM"
+                            "TableName": "${this.docsTable.tableName}"
                     }`
                 },
 
@@ -90,6 +98,10 @@ export class CdkStack extends Stack {
 
         let s3writePolicy = new PolicyStatement({
             actions: ['S3:PutObject'],
+            resources: [`${this.docsBucket.bucketArn}/*`]
+        });
+        let s3ReadPolicy = new PolicyStatement({
+            actions: ['S3:GetObject'],
             resources: [`${this.docsBucket.bucketArn}/*`]
         });
         this.processLambda = new Function(this, 'process-doc', {
@@ -109,13 +121,23 @@ export class CdkStack extends Stack {
         });
         this.catalogLambda = new Function(this, 'catalog-doc', {
             code: Code.asset('./handlers/catalog'),
-            handler: 'index.handler',
+            handler: 'index.processRecords',
             runtime: Runtime.Nodejs810,
             environment: {
                 DOCS_TABLE: this.docsTable.tableName
             },
             initialPolicy: [dynamoAccess],
+        });
 
+        this.getDocLambda = new Function(this, 'get-doc', {
+            code: Code.asset('./handlers/catalog'),
+            handler: 'index.get',
+            runtime: Runtime.Nodejs810,
+            environment: {
+                DOCS_TABLE: this.docsTable.tableName,
+                S3_BUCKET: this.docsBucket.bucketName
+            },
+            initialPolicy: [dynamoAccess, s3ReadPolicy],
         });
 
         this.catalogLambda.addEventSource(new S3EventSource(this.docsBucket, {
